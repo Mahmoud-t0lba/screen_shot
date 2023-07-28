@@ -4,26 +4,39 @@
 
 <div id="code">
   <pre><code>
-      self.window.makeSecure()
-  </code></pre>
-</div>
+    import UIKit
+    import Flutter
 
-<div id="code">
-  <pre><code>
+    @UIApplicationMain
+    @objc class AppDelegate: FlutterAppDelegate {
+        override func application(
+            _ application: UIApplication,
+            didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+        ) -> Bool {
+            GeneratedPluginRegistrant.register(with: self)
+            self.window.makeSecure()
+            return super.application(application, didFinishLaunchingWithOptions: launchOptions)
+        }
+    }
+
     extension UIWindow {
-func makeSecure() {
-    let field = UITextField()
-    field.isSecureTextEntry = true
-    self.addSubview(field)
-    field.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-    field.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
-    self.layer.superlayer?.addSublayer(field.layer)
-    field.layer.sublayers?.first?.addSublayer(self.layer)
-  }
-}
-
+    func makeSecure() {
+        let field = UITextField()
+        field.isSecureTextEntry = true
+        self.addSubview(field)
+        field.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+        field.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        self.layer.superlayer?.addSublayer(field.layer)
+        field.layer.sublayers?.first?.addSublayer(self.layer)
+      }
+    }
   </code></pre>
 </div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>
+<button class="btn" data-clipboard-target="#code">Copy</button>
+<script>
+  var clipboard = new ClipboardJS('.btn');
+</script>
 
 ![ios_ex](https://github.com/Mahmoud-t0lba/screen_shot/assets/78425511/28060f1f-2a37-4b20-8e5f-0e864fd11f96)
 
