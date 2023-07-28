@@ -1,16 +1,51 @@
 # screen_shot
 
-A new Flutter project.
+# IOS Example
 
-## Getting Started
+<div id="code">
+  <pre><code>
+      self.window.makeSecure()
+  </code></pre>
+</div>
 
-This project is a starting point for a Flutter application.
+<div id="code">
+  <pre><code>
+    extension UIWindow {
+func makeSecure() {
+    let field = UITextField()
+    field.isSecureTextEntry = true
+    self.addSubview(field)
+    field.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
+    field.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+    self.layer.superlayer?.addSublayer(field.layer)
+    field.layer.sublayers?.first?.addSublayer(self.layer)
+  }
+}
 
-A few resources to get you started if this is your first Flutter project:
+  </code></pre>
+</div>
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![ios_ex](https://github.com/Mahmoud-t0lba/screen_shot/assets/78425511/28060f1f-2a37-4b20-8e5f-0e864fd11f96)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Android Example
+
+<div id="code">
+  <pre><code>
+package com.example.screen_shot
+import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.android.FlutterFragmentActivity
+import io.flutter.embedding.engine.FlutterEngine
+import io.flutter.plugins.GeneratedPluginRegistrant
+import android.view.WindowManager.LayoutParams
+
+class MainActivity: FlutterFragmentActivity() {
+    override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
+        window.addFlags(LayoutParams.FLAG_SECURE)
+        GeneratedPluginRegistrant.registerWith(flutterEngine)
+    }
+}
+  </code></pre>
+</div>
+
+![android_ex](https://github.com/Mahmoud-t0lba/screen_shot/assets/78425511/0da6d3a3-2ea0-4969-bfa7-2a334f22b5d4)
+
