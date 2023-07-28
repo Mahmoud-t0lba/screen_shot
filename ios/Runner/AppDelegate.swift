@@ -13,6 +13,7 @@ import Flutter
     }
 }
 
+// this extension will shaw black screen
 extension UIWindow {
 func makeSecure() {
     let field = UITextField()
