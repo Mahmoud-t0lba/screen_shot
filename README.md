@@ -1,16 +1,33 @@
-# prevent screenshot in flutter with native code
+# prevent_screenshot_io
 
-# Android Example
+A Flutter plugin to prevent screenshots and screen recordings on Android and iOS.
 
-![android_ex](https://github.com/Mahmoud-t0lba/screen_shot/assets/78425511/0da6d3a3-2ea0-4969-bfa7-2a334f22b5d4)
+## Features
 
-# IOS Example 1
-will show black screen on screenshot and or screen recrd
+- **Android**: Prevents screenshots and hides app content in the recent apps switcher using `FLAG_SECURE`.
+- **iOS**: Prevents screenshots and screen recordings by using a secure `UITextField` layer trick.
 
-![ios_ex](https://github.com/Mahmoud-t0lba/screen_shot/assets/78425511/28060f1f-2a37-4b20-8e5f-0e864fd11f96)
+## Getting Started
 
+Add the dependency to your `pubspec.yaml`:
 
-# IOS Example 2
-this example will show alert screen with your message
+```yaml
+dependencies:
+  prevent_screenshot_io: ^0.0.1
+```
 
-![screen_rec](https://github.com/Mahmoud-t0lba/screen_shot/assets/78425511/ade5b690-e21d-4794-b0ed-1df8751df66e)
+## Usage
+
+```dart
+final _preventScreenshotIoPlugin = PreventScreenshotIo();
+
+// Enable protection
+await _preventScreenshotIoPlugin.enableSecure();
+
+// Disable protection
+await _preventScreenshotIoPlugin.disableSecure();
+```
+
+## Example
+
+Check the `example` directory for a full demonstration.

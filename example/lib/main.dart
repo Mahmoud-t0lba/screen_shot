@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:prevent_screenshot_io/prevent_screenshot_io.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Prevent ScreenShot',
+      title: 'Prevent ScreenShot Example',
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
     );
@@ -27,36 +27,30 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  static const MethodChannel _channel = MethodChannel('prevent_screen');
+  final _preventScreenshotIoPlugin = PreventScreenshotIo();
   bool _isSecure = false;
 
   Future<void> _toggleScreenSecure() async {
     try {
       final bool newStatus = !_isSecure;
       if (newStatus) {
-        await _channel.invokeMethod('enableSecure');
+        await _preventScreenshotIoPlugin.enableSecure();
       } else {
-        await _channel.invokeMethod('disableSecure');
+        await _preventScreenshotIoPlugin.disableSecure();
       }
       setState(() {
         _isSecure = newStatus;
       });
-    } on PlatformException catch (e) {
-      debugPrint("Failed to toggle screen secure: '${e.message}'.");
+    } catch (e) {
+      debugPrint("Failed to toggle screen secure: '$e'.");
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    // _channel.invokeMethod('disableSecure');
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Prevent ScreenShot'),
+        title: const Text('Prevent ScreenShot Example'),
       ),
       body: Center(
         child: Column(

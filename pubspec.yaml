@@ -1,14 +1,16 @@
-name: screen_shot
-description: A new Flutter project.
-publish_to: 'none'
-version: 1.0.0+1
+name: prevent_screenshot_io
+description: A Flutter plugin to prevent screenshots and screen recordings on Android and iOS.
+version: 0.0.1
+homepage: https://github.com/Mahmoud-t0lba/screen_shot
+
 environment:
   sdk: ^3.6.0
+  flutter: ">=3.3.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^1.0.8
+  plugin_platform_interface: ^2.0.4
 
 dev_dependencies:
   flutter_test:
@@ -16,4 +18,10 @@ dev_dependencies:
   flutter_lints: ^4.0.0
 
 flutter:
-  uses-material-design: true
+  plugin:
+    platforms:
+      android:
+        package: com.example.prevent_screenshot_io
+        pluginClass: PreventScreenshotIoPlugin
+      ios:
+        pluginClass: PreventScreenshotIoPlugin
