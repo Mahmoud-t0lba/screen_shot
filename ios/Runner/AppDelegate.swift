@@ -10,14 +10,23 @@ import Flutter
         didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
     ) -> Bool {
         GeneratedPluginRegistrant.register(with: self)
-        if let window = self.window {
-            window.makeSecure()
-        } else if #available(iOS 13.0, *) {
-            if let scene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-               let window = scene.windows.first {
-                window.makeSecure()
-            }
-        }
+        
+        let controller : FlutterViewController = window?.rootViewController as! FlutterViewController
+        let preventScreenChannel = FlutterMethodChannel(name: "prevent_screen",
+                                                  binaryMessenger: controller.binaryMessenger)
+        
+        preventScreenChannel.setMethodCallHandler({
+          (call: FlutterMethodCall, result: @escaping FlutterResult) -> Void in
+          if call.method == "enableSecure" {
+            self.window?.makeSecure()
+            result(true)
+          } else if call.method == "disableSecure" {
+            self.window?.makeInsecure()
+            result(true)
+          } else {
+            result(FlutterMethodNotImplemented)
+          }
+        })
 
         NotificationCenter.default.addObserver(
             self,
@@ -107,12 +116,19 @@ import Flutter
 
 extension UIWindow {
     func makeSecure() {
+        if self.viewWithTag(9999) != nil { return }
         let field = UITextField()
+        field.tag = 9999
         field.isSecureTextEntry = true
         self.addSubview(field)
-        field.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
-        field.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
         self.layer.superlayer?.addSublayer(field.layer)
         field.layer.sublayers?.last?.addSublayer(self.layer)
+    }
+
+    func makeInsecure() {
+        if let field = self.viewWithTag(9999) as? UITextField {
+            self.layer.superlayer?.addSublayer(self.layer)
+            field.removeFromSuperview()
+        }
     }
 }
