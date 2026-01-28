@@ -1,0 +1,22 @@
+PODS:
+  - Flutter (1.0.0)
+  - prevent_screenshot_io (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - Flutter (from `Flutter`)
+  - prevent_screenshot_io (from `.symlinks/plugins/prevent_screenshot_io/ios`)
+
+EXTERNAL SOURCES:
+  Flutter:
+    :path: Flutter
+  prevent_screenshot_io:
+    :path: ".symlinks/plugins/prevent_screenshot_io/ios"
+
+SPEC CHECKSUMS:
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  prevent_screenshot_io: f2c6e999d859d2ddd130b70c02b9886a74a28d79
+
+PODFILE CHECKSUM: b6c1777b8742f73e5cdad8789e3d9f4d8eaca881
+
+COCOAPODS: 1.16.2

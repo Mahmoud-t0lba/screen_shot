@@ -11,7 +11,7 @@ A Flutter plugin to prevent screenshots and screen recordings on Android and iOS
                        DESC
   s.homepage         = 'https://github.com/Mahmoud-t0lba/screen_shot'
   s.license          = { :file => '../LICENSE' }
-  s.author           = { 'Mahmoud Tolba' => 'your-email@example.com' }
+  s.author           = { 'Mahmoud Tolba' => 'mahmoudt0lba0111@gmail.com' }
   s.source           = { :path => '.' }
   s.source_files = 'Classes/**/*'
   s.dependency 'Flutter'
