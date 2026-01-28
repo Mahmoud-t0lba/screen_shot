@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  prevent_screenshot_io:
+  prevent_app_screen:
     path: ../
 
 dev_dependencies:

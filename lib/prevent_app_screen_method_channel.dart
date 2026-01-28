@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 
-import 'prevent_screenshot_io_platform_interface.dart';
+import 'prevent_app_screen_platform_interface.dart';
 
-class MethodChannelPreventScreenshotIo extends PreventScreenshotIoPlatform {
+class MethodChannelPreventAppScreen extends PreventAppScreenPlatform {
   @visibleForTesting
-  final methodChannel = const MethodChannel('prevent_screenshot_io');
+  final methodChannel = const MethodChannel('prevent_app_screen');
 
   @override
   Future<void> enableSecure() async {

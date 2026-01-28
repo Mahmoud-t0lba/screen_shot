@@ -1,4 +1,4 @@
-group = "com.example.prevent_screenshot_io"
+group = "com.example.prevent_app_screen"
 version = "1.0-SNAPSHOT"
 
 plugins {
@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.prevent_screenshot_io"
+    namespace = "com.example.prevent_app_screen"
     compileSdk = 35
 
     defaultConfig {

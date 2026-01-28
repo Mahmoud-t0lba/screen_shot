@@ -1,12 +1,12 @@
 import Flutter
 import UIKit
 
-public class PreventScreenshotIoPlugin: NSObject, FlutterPlugin {
+public class PreventAppScreenPlugin: NSObject, FlutterPlugin {
     private var channel: FlutterMethodChannel?
     
     public static func register(with registrar: FlutterPluginRegistrar) {
-        let channel = FlutterMethodChannel(name: "prevent_screenshot_io", binaryMessenger: registrar.messenger())
-        let instance = PreventScreenshotIoPlugin()
+        let channel = FlutterMethodChannel(name: "prevent_app_screen", binaryMessenger: registrar.messenger())
+        let instance = PreventAppScreenPlugin()
         instance.channel = channel
         registrar.addMethodCallDelegate(instance, channel: channel)
         registrar.addApplicationDelegate(instance)

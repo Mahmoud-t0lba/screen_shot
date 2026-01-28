@@ -1,7 +1,6 @@
-package com.example.prevent_screenshot_io
+package com.example.prevent_app_screen
 
 import android.app.Activity
-import android.os.Build
 import android.view.WindowManager
 import androidx.annotation.NonNull
 
@@ -13,13 +12,13 @@ import io.flutter.plugin.common.MethodChannel
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler
 import io.flutter.plugin.common.MethodChannel.Result
 
-/** PreventScreenshotIoPlugin */
-class PreventScreenshotIoPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
+/** PreventAppScreenPlugin */
+class PreventAppScreenPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
   private lateinit var channel : MethodChannel
   private var activity: Activity? = null
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "prevent_screenshot_io")
+    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "prevent_app_screen")
     channel.setMethodCallHandler(this)
   }
 

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:prevent_screenshot_io/prevent_screenshot_io.dart';
+import 'package:prevent_app_screen/prevent_app_screen.dart';
 
 void main() {
-  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -12,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: 'Prevent ScreenShot Example',
+      title: 'Prevent App Screen Example',
       debugShowCheckedModeBanner: false,
       home: MyHomePage(),
     );
@@ -27,16 +26,16 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  final _preventScreenshotIoPlugin = PreventScreenshotIo();
+  final _preventAppScreenPlugin = PreventAppScreen();
   bool _isSecure = false;
 
   Future<void> _toggleScreenSecure() async {
     try {
       final bool newStatus = !_isSecure;
       if (newStatus) {
-        await _preventScreenshotIoPlugin.enableSecure();
+        await _preventAppScreenPlugin.enableSecure();
       } else {
-        await _preventScreenshotIoPlugin.disableSecure();
+        await _preventAppScreenPlugin.disableSecure();
       }
       setState(() {
         _isSecure = newStatus;
@@ -50,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Prevent ScreenShot Example'),
+        title: const Text('Prevent App Screen Example'),
       ),
       body: Center(
         child: Column(
