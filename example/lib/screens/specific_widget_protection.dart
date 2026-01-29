@@ -1,15 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:prevent_app_screen/prevent_app_screen.dart';
 
-class SpecificWidgetProtectionScreen extends StatefulWidget {
+class SpecificWidgetProtectionScreen extends StatelessWidget {
   const SpecificWidgetProtectionScreen({super.key});
-
-  @override
-  State<SpecificWidgetProtectionScreen> createState() => _SpecificWidgetProtectionScreenState();
-}
-
-class _SpecificWidgetProtectionScreenState extends State<SpecificWidgetProtectionScreen> {
-  bool _forceBlur = false;
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +12,38 @@ class _SpecificWidgetProtectionScreenState extends State<SpecificWidgetProtectio
         padding: const EdgeInsets.all(24.0),
         child: Column(
           children: [
-            const Text(
-              "Only the card below is protected (blurred) when capture is detected.",
-              textAlign: TextAlign.center,
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: Colors.blue.shade50,
+                borderRadius: BorderRadius.circular(12),
+                border: Border.all(color: Colors.blue.shade200),
+              ),
+              child: Text(
+                "🚀 To block screenshots for this specific card, we enable 'protectWindow' below. This secures the whole app while this card is visible.",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 13, color: Colors.blue.shade900),
+              ),
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: 30),
             SpecificWidgetProtection(
-              prevent: true,
-              forceBlur: _forceBlur,
-              blurAmount: 18,
+              protectWindow: true, // AUTO-TRIGGERS WINDOW SECURITY
+              placeholder: Container(
+                height: 150,
+                width: double.infinity,
+                decoration: BoxDecoration(
+                  color: Colors.black87,
+                  borderRadius: BorderRadius.circular(20),
+                ),
+                child: const Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.lock, color: Colors.white, size: 50),
+                    SizedBox(height: 10),
+                    Text("SECURE CONTENT", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ),
               child: Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(24),
@@ -55,15 +71,13 @@ class _SpecificWidgetProtectionScreenState extends State<SpecificWidgetProtectio
                 ),
               ),
             ),
-            const Spacer(),
-            ElevatedButton.icon(
-              onPressed: () => setState(() => _forceBlur = !_forceBlur),
-              icon: Icon(_forceBlur ? Icons.visibility : Icons.visibility_off),
-              label: Text(_forceBlur ? "Show Content" : "Blur Content Now"),
-              style: ElevatedButton.styleFrom(
-                minimumSize: const Size(double.infinity, 50),
-              ),
+            const SizedBox(height: 30),
+            const Text(
+              "Because 'protectWindow' is true above, you cannot take a screenshot of this entire page right now!",
+              textAlign: TextAlign.center,
+              style: TextStyle(fontStyle: FontStyle.italic, color: Colors.red),
             ),
+            const Spacer(),
           ],
         ),
       ),

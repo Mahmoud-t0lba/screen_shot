@@ -50,18 +50,28 @@ class PreventAppScreen {
   }
 }
 
-/// A widget that blurs its content when a screen capture or recording is detected.
+/// A widget that protects its content. For screenshots, it can trigger window-wide
+/// protection automatically. For recordings, it blurs or hides content.
 class SpecificWidgetProtection extends StatefulWidget {
   final Widget child;
 
-  /// The amount of blur to apply when capture is detected. Defaults to 20.
+  /// The amount of blur to apply. Defaults to 20.
   final double blurAmount;
 
-  /// If true (default), the widget will automatically blur when a screenshot or recording is detected.
+  /// If true (default), the widget will automatically blur/hide when capture is detected.
   final bool prevent;
 
-  /// If true, the widget will be blurred regardless of capture status. Useful for manual control.
+  /// If true, the widget will be protected regardless of capture status.
   final bool forceBlur;
+
+  /// If true, this widget will automatically enable app-wide screenshot blocking
+  /// as long as this widget is visible (mounted). This is the ONLY way to
+  /// guarantee protection in saved screenshot files.
+  final bool protectWindow;
+
+  /// An optional widget to show instead of the blurred child when security is active.
+  /// If null, a blur effect is used.
+  final Widget? placeholder;
 
   const SpecificWidgetProtection({
     super.key,
@@ -69,6 +79,8 @@ class SpecificWidgetProtection extends StatefulWidget {
     this.blurAmount = 20.0,
     this.prevent = true,
     this.forceBlur = false,
+    this.protectWindow = false,
+    this.placeholder,
   });
 
   @override
@@ -78,16 +90,37 @@ class SpecificWidgetProtection extends StatefulWidget {
 class _SpecificWidgetProtectionState extends State<SpecificWidgetProtection> {
   bool _isCaptured = false;
   final _plugin = const PreventAppScreen();
+  bool _windowIsProtected = false;
 
   @override
   void initState() {
     super.initState();
     _plugin.addCapturedListener(_onCapturedChanged);
+    _handleWindowProtection(widget.protectWindow);
+  }
+
+  @override
+  void didUpdateWidget(SpecificWidgetProtection oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.protectWindow != widget.protectWindow) {
+      _handleWindowProtection(widget.protectWindow);
+    }
+  }
+
+  void _handleWindowProtection(bool protect) {
+    if (protect && !_windowIsProtected) {
+      _plugin.enableSecure();
+      _windowIsProtected = true;
+    } else if (!protect && _windowIsProtected) {
+      _plugin.disableSecure();
+      _windowIsProtected = false;
+    }
   }
 
   @override
   void dispose() {
     _plugin.removeCapturedListener(_onCapturedChanged);
+    if (_windowIsProtected) _plugin.disableSecure();
     super.dispose();
   }
 
@@ -97,8 +130,11 @@ class _SpecificWidgetProtectionState extends State<SpecificWidgetProtection> {
 
   @override
   Widget build(BuildContext context) {
-    // Blur if forceBlur is true OR (prevent is true AND screen is being captured)
     final bool active = widget.forceBlur || (widget.prevent && _isCaptured);
+
+    if (active && widget.placeholder != null) {
+      return widget.placeholder!;
+    }
 
     return ImageFiltered(
       imageFilter: ImageFilter.blur(
