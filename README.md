@@ -2,35 +2,43 @@
 
 [![Pub Version](https://img.shields.io/pub/v/prevent_app_screen?style=flat-square&logo=dart)](https://pub.dev/packages/prevent_app_screen)
 [![License](https://img.shields.io/github/license/Mahmoud-t0lba/screen_shot?style=flat-square)](https://github.com/Mahmoud-t0lba/screen_shot/blob/main/LICENSE)
+[![Platform Support](https://img.shields.io/badge/platform-android%20%7C%20ios%20%7C%20macos%20%7C%20windows%20%7C%20linux%20%7C%20web-blue?style=flat-square)](https://pub.dev/packages/prevent_app_screen)
 
-A powerful, high-performance Flutter plugin designed to protect your application from **Screenshots** and **Screen Recordings**. Cross-platform support for **Android, iOS, macOS, Windows, Linux, and Web**.
+A powerful, high-performance Flutter plugin designed to protect your application from **Screenshots** and **Screen Recordings**. Ideal for banking apps, streaming platforms, and privacy-focused tools.
 
 ---
 
 ## ✨ Key Features
-*   🚀 **Global Protection**: Secure your entire app with a single initialization.
-*   📱 **Screen-Level Security**: Apply protection to specific routes or pages.
-*   🌫️ **Granular Blur (Smart Masking)**: Protect specific UI components while keeping the rest of the app functional.
-*   🔄 **App Switcher Blur**: Automatically hides app content in the recent apps/multitasking view (Mobile).
-*   🛠️ **Proactive Window Locking**: Automatically blocks screenshots when sensitive widgets are on screen.
-*   🎥 **Recording Detection**: Real-time detection and response to screen recordings and mirroring (Mobile).
+
+*   🚀 **Global Protection**: Secure your entire app with a single line of code.
+*   💻 **Cross-Platform**: Full support for Android, iOS, macOS, Windows, Linux, and Web.
+*   📱 **Screen-Level Security**: Dynamic protection that activates/deactivates per route.
+*   🌫️ **Granular Masking**: Blur or hide specific UI components (e.g., Credit Card numbers).
+*   🔄 **App Switcher Blur**: Automatically hides app content in multitasking views.
+*   🎥 **Recording Detection**: Real-time detection and response to screen recordings and mirroring.
 
 ---
 
-## 🌟 Three Levels of Protection
+## 🚀 Getting Started
 
-### 1️⃣ Global Protection (App-Wide)
-Best for banking or high-security apps where the entire experience must be private.
+### Installation
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Mahmoud-t0lba/screen_shot/main/assets/global_protection.png" width="250" alt="Global Protection"/>
-</p>
+Add the dependency to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  prevent_app_screen: ^0.1.1
+```
+
+### Basic Initialization
+
+For the best security, initialize the plugin in your `main()` method to protect the entire application from the start.
 
 ```dart
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   
-  // Enable protection for every screen in the app
+  // Enable protection globally
   PreventAppScreen.initialize(true); 
   
   runApp(const MyApp());
@@ -39,83 +47,58 @@ void main() {
 
 ---
 
-### 2️⃣ Full Screen Guard
-Wrap specific screens to prevent captures only while that screen is visible.
+## 🌟 Protection Levels
 
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Mahmoud-t0lba/screen_shot/main/assets/screen_protection.png" width="450" alt="Screen Protection"/>
-</p>
+### 1️⃣ Full Screen Protection
+Wrap specific screens to block screenshots and recording ONLY while that specific page is visible. Useful for login or profile pages.
 
 ```dart
 @override
 Widget build(BuildContext context) {
   return FullScreenProtection(
-    prevent: true, // Auto-blocks screenshots for this window
+    prevent: true,
     child: Scaffold(
-      appBar: AppBar(title: Text("Secret Settings")),
-      body: MyPrivateProfile(),
+      appBar: AppBar(title: Text("Sensitive Info")),
+      body: MyPrivateContent(),
     ),
   );
 }
 ```
 
----
-
-### 3️⃣ Specific Widget Protection (Flexible)
-Protect specific items (like QR codes or Credit Cards). This mode supports **Blurring** or showing a **Placeholder**.
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/Mahmoud-t0lba/screen_shot/main/assets/specific_widget.png" width="300" alt="Specific Widget Blur"/>
-</p>
+### 2️⃣ Granular Widget Masking
+Use `SpecificWidgetProtection` to protect specific UI elements. You can choose between a **Blur effect** or a custom **Placeholder**.
 
 ```dart
 SpecificWidgetProtection(
-  protectWindow: true,   // Proactive: Blocks screenshots for the whole app ONLY while this is visible
-  blurAmount: 15.0,      // Customize the blur intensity
-  placeholder: MyLockIcon(), // Optional: Show a custom widget instead of blurring
+  protectWindow: true,   // Blocks the ENTIRE screenshot/recording while visible
+  blurAmount: 15.0,      // Intensity of the blur
+  placeholder: BlackBox(), // Optional: Show a custom widget instead of blurring
   child: CreditCardWidget(),
 )
 ```
 
-| Parameter | Description |
-| :--- | :--- |
-| `protectWindow` | **Proactive Mode**: Blocks the whole app screenshot as long as this widget is on screen. |
-| `prevent` | **Detection Mode**: Blurs/Hides the widget automatically if a recording starts. |
-| `forceBlur` | **Privacy Mode**: Manually triggers the blur regardless of capture status. |
-| `placeholder` | A custom widget to show instead of the blurred child (e.g., a Black Box). |
+| Parameter       | Type      | Description                                                                 |
+|:----------------|:----------|:----------------------------------------------------------------------------|
+| `protectWindow` | `bool`    | **Proactive**: Secure the whole window as long as this widget is on screen. |
+| `prevent`       | `bool`    | **Reactive**: Auto-blur the widget if a screen recording starts (Mobile).   |
+| `forceBlur`     | `bool`    | **Manual**: Always blur the widget regardless of capture status.            |
+| `placeholder`   | `Widget?` | Display this widget instead of applying a blur effect.                      |
 
 ---
 
-## 🔍 Platform Support & Behavior
+## 🔍 Platform Support & Details
 
-| Feature | Android | iOS | macOS | Windows | Linux | Web |
-| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
-| **Screenshot Blocking** | ✅ | ✅ | ✅ | ✅ | ⚠️¹ | ⚠️² |
-| **Recording Prevention** | ✅ | ✅ | ✅ | ✅ | ⚠️¹ | ⚠️² |
-| **App Switcher Blur** | ✅ | ✅ | N/A | N/A | N/A | N/A |
-| **Capture Detection** | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+| Feature                  | Android | iOS | macOS | Windows | Linux | Web |
+|:-------------------------|:-------:|:---:|:-----:|:-------:|:-----:|:---:|
+| **Screenshot Blocking**  |    ✅    |  ✅  |   ✅   |    ✅    |  ⚠️¹  | ⚠️² |
+| **Recording Prevention** |    ✅    |  ✅  |   ✅   |    ✅    |  ⚠️¹  | ⚠️² |
+| **App Switcher Blur**    |    ✅    |  ✅  |  N/A  |   N/A   |  N/A  | N/A |
+| **Capture Detection**    |    ✅    |  ✅  |   ❌   |    ❌    |   ❌   |  ❌  |
 
-¹ **Linux**: Support is dependent on the compositor (X11/Wayland). Currently provides a success response but may not reliably block all capture methods.
-² **Web**: Browsers do not provide APIs to block screenshots. The plugin applies `user-select: none` as a deterrent.
-
-> **Note**: For Screenshots, the OS typically captures the frame before notifying the app. To reliably block a screenshot file, use `FullScreenProtection` or the `protectWindow` flag in `SpecificWidgetProtection`.
-
-## 📦 Installation
-
-Add this to your `pubspec.yaml`:
-
-```yaml
-dependencies:
-  prevent_app_screen: ^0.1.1
-```
-
----
-
-## 💬 Aliases (Legacy Support)
-The plugin provides these aliases to match your preferred naming style:
-- `SecureWidget` -> `SpecificWidgetProtection`
-- `PreventWidget` -> `FullScreenProtection`
-- `PreventScreen` -> `FullScreenProtection`
+### Platform Notes
+- ¹ **Linux**: Screenshot prevention is compositor-dependent (X11/Wayland). The plugin provides a success response but actual blocking varies by environment.
+- ² **Web**: Browsers do not provide APIs to block screenshots. The plugin applies `user-select: none` to the body as a deterrent.
+- **macOS/Windows**: Uses native window affinity APIs to prevent capture by other applications.
 
 ---
 
