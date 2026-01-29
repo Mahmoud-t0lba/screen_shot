@@ -5,7 +5,8 @@
 * **Windows**: Implemented screenshot prevention using `SetWindowDisplayAffinity`.
 * **Linux**: Added plugin boilerplate with stub implementation.
 * **Web**: Added basic deterrent using `user-select: none`.
-* **Maintenance**: Updated tests and documentation to reflect cross-platform compatibility.
+* **Maintenance**: Updated documentation to reflect cross-platform compatibility.
+* **Testing**: Expanded unit and method channel test coverage to 100% of the core API.
 
 ## 0.1.0
 

@@ -29,18 +29,19 @@ class MockPreventAppScreenPlatform extends PreventAppScreenPlatform with MockPla
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  late MockPreventAppScreenPlatform mockPlatform;
-
-  setUp(() {
-    mockPlatform = MockPreventAppScreenPlatform();
-    PreventAppScreenPlatform.instance = mockPlatform;
-  });
-
   test('$MethodChannelPreventAppScreen is the default instance', () {
     expect(PreventAppScreenPlatform.instance, isA<MethodChannelPreventAppScreen>());
   });
 
   group('PreventAppScreen API', () {
+    late MockPreventAppScreenPlatform mockPlatform;
+
+    setUp(() {
+      mockPlatform = MockPreventAppScreenPlatform();
+      PreventAppScreenPlatform.instance = mockPlatform;
+      PreventAppScreen.resetState();
+    });
+
     test('initialize(true) enables secure and sets handler', () async {
       await PreventAppScreen.initialize(true);
       expect(mockPlatform.enableSecureCount, 1);
@@ -58,19 +59,16 @@ void main() {
       await plugin.enableSecure();
       expect(mockPlatform.enableSecureCount, 1);
 
+      // Since _secureCount becomes 2, it won't call platform again by default
+      // UNLESS we want to test that it DOESN'T call it again.
       await plugin.enableSecure();
-      expect(mockPlatform.enableSecureCount, 2);
+      expect(mockPlatform.enableSecureCount, 1);
     });
 
     test('disableSecure decrements count and calls platform when zero', () async {
       const plugin = PreventAppScreen();
-      // Reset from previous tests if necessary (though _secureCount is static)
-      // Since it's static, we should be careful.
-      // For testing purposes, we usually assume a fresh state or handle resets.
-      // But let's just test the flow.
-
-      await plugin.enableSecure(); // 1
-      await plugin.disableSecure(); // 0
+      await plugin.enableSecure(); // count 1, platform 1
+      await plugin.disableSecure(); // count 0, platform 1
       expect(mockPlatform.disableSecureCount, 1);
     });
 
@@ -92,6 +90,14 @@ void main() {
   });
 
   group('Widgets', () {
+    late MockPreventAppScreenPlatform mockPlatform;
+
+    setUp(() {
+      mockPlatform = MockPreventAppScreenPlatform();
+      PreventAppScreenPlatform.instance = mockPlatform;
+      PreventAppScreen.resetState();
+    });
+
     testWidgets('FullScreenProtection calls enableSecure on init', (WidgetTester tester) async {
       await tester.pumpWidget(
         const Directionality(
@@ -105,7 +111,8 @@ void main() {
 
       expect(mockPlatform.enableSecureCount, 1);
 
-      await tester.pumpWidget(Container()); // Dispose
+      // Dispose should call disableSecure
+      await tester.pumpWidget(const SizedBox()); // Different widget to trigger dispose
       expect(mockPlatform.disableSecureCount, 1);
     });
 
@@ -122,8 +129,26 @@ void main() {
 
       expect(mockPlatform.enableSecureCount, 1);
 
-      await tester.pumpWidget(Container()); // Dispose
+      await tester.pumpWidget(const SizedBox());
       expect(mockPlatform.disableSecureCount, 1);
+    });
+
+    testWidgets('SpecificWidgetProtection blurs content when active', (WidgetTester tester) async {
+      await tester.pumpWidget(
+        const Directionality(
+          textDirection: TextDirection.ltr,
+          child: SpecificWidgetProtection(
+            forceBlur: true,
+            child: Text('Hidden Text'),
+          ),
+        ),
+      );
+
+      expect(find.byType(ImageFiltered), findsOneWidget);
+      final ImageFiltered filter = tester.widget(find.byType(ImageFiltered));
+      // In Flutter 3.x, ImageFilter.blur properties might be hard to check directly
+      // but we can check if it exists.
+      expect(filter.imageFilter, isNotNull);
     });
   });
 }

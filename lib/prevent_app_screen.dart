@@ -26,6 +26,13 @@ class PreventAppScreen {
     }
   }
 
+  @visibleForTesting
+  static void resetState() {
+    _isGloballySecure = null;
+    _secureCount = 0;
+    _capturedListeners.clear();
+  }
+
   const PreventAppScreen();
 
   void addCapturedListener(Function(bool) listener) => _capturedListeners.add(listener);
@@ -42,8 +49,7 @@ class PreventAppScreen {
   }
 
   Future<void> _disable() async {
-    _secureCount--;
-    if (_secureCount < 0) _secureCount = 0;
+    if (_secureCount > 0) _secureCount--;
     if (_secureCount == 0 && !(_isGloballySecure ?? false)) {
       await PreventAppScreenPlatform.instance.disableSecure();
     }
