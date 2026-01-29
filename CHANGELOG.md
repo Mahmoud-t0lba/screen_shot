@@ -1,3 +1,12 @@
+## 0.1.1
+
+* **Multi-Platform Support**: Added support for macOS, Windows, Linux, and Web.
+* **macOS**: Implemented screenshot/recording prevention using `NSWindow.sharingType`.
+* **Windows**: Implemented screenshot prevention using `SetWindowDisplayAffinity`.
+* **Linux**: Added plugin boilerplate with stub implementation.
+* **Web**: Added basic deterrent using `user-select: none`.
+* **Maintenance**: Updated tests and documentation to reflect cross-platform compatibility.
+
 ## 0.1.0
 
 * **New Feature**: `PreventAppScreen.initialize(bool)` for global, app-wide protection.

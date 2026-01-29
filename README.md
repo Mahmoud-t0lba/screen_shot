@@ -3,7 +3,7 @@
 [![Pub Version](https://img.shields.io/pub/v/prevent_app_screen?style=flat-square&logo=dart)](https://pub.dev/packages/prevent_app_screen)
 [![License](https://img.shields.io/github/license/Mahmoud-t0lba/screen_shot?style=flat-square)](https://github.com/Mahmoud-t0lba/screen_shot/blob/main/LICENSE)
 
-A powerful, high-performance Flutter plugin designed to protect your application from **Screenshots** and **Screen Recordings**. Ideal for FinTech, Healthcare, and Privacy-focused applications.
+A powerful, high-performance Flutter plugin designed to protect your application from **Screenshots** and **Screen Recordings**. Cross-platform support for **Android, iOS, macOS, Windows, Linux, and Web**.
 
 ---
 
@@ -11,9 +11,9 @@ A powerful, high-performance Flutter plugin designed to protect your application
 *   🚀 **Global Protection**: Secure your entire app with a single initialization.
 *   📱 **Screen-Level Security**: Apply protection to specific routes or pages.
 *   🌫️ **Granular Blur (Smart Masking)**: Protect specific UI components while keeping the rest of the app functional.
-*   🔄 **App Switcher Blur**: Automatically hides app content in the recent apps/multitasking view.
+*   🔄 **App Switcher Blur**: Automatically hides app content in the recent apps/multitasking view (Mobile).
 *   🛠️ **Proactive Window Locking**: Automatically blocks screenshots when sensitive widgets are on screen.
-*   🎥 **Recording Detection**: Real-time detection and response to screen recordings and mirroring.
+*   🎥 **Recording Detection**: Real-time detection and response to screen recordings and mirroring (Mobile).
 
 ---
 
@@ -88,12 +88,15 @@ SpecificWidgetProtection(
 
 ## 🔍 Platform Support & Behavior
 
-| Feature | Android | iOS | Behavior Description |
-| :--- | :---: | :---: | :--- |
-| **Screenshot Blocking** | ✅ | ✅ | Android shows a black screen; iOS shows a custom secure overlay. |
-| **Recording Prevention** | ✅ | ✅ | Prevents recording of the secure window content. |
-| **App Switcher Blur** | ✅ | ✅ | Hides app preview in the multitasking menu. |
-| **Capture Detection** | ✅ | ✅ | Notifies the app through `onCapturedChanged` listener. |
+| Feature | Android | iOS | macOS | Windows | Linux | Web |
+| :--- | :---: | :---: | :---: | :---: | :---: | :---: |
+| **Screenshot Blocking** | ✅ | ✅ | ✅ | ✅ | ⚠️¹ | ⚠️² |
+| **Recording Prevention** | ✅ | ✅ | ✅ | ✅ | ⚠️¹ | ⚠️² |
+| **App Switcher Blur** | ✅ | ✅ | N/A | N/A | N/A | N/A |
+| **Capture Detection** | ✅ | ✅ | ❌ | ❌ | ❌ | ❌ |
+
+¹ **Linux**: Support is dependent on the compositor (X11/Wayland). Currently provides a success response but may not reliably block all capture methods.
+² **Web**: Browsers do not provide APIs to block screenshots. The plugin applies `user-select: none` as a deterrent.
 
 > **Note**: For Screenshots, the OS typically captures the frame before notifying the app. To reliably block a screenshot file, use `FullScreenProtection` or the `protectWindow` flag in `SpecificWidgetProtection`.
 
@@ -103,7 +106,7 @@ Add this to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  prevent_app_screen: ^0.1.0
+  prevent_app_screen: ^0.1.1
 ```
 
 ---

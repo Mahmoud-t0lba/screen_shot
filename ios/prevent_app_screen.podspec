@@ -4,10 +4,10 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'prevent_app_screen'
-  s.version          = '0.0.1'
+  s.version          = '0.1.1'
   s.summary          = 'A Flutter plugin to prevent screenshots and screen recordings.'
   s.description      = <<-DESC
-A Flutter plugin to prevent screenshots and screen recordings on Android and iOS.
+A Flutter plugin to prevent screenshots and screen recordings on Android, iOS, macOS, Windows, Linux, and Web.
                        DESC
   s.homepage         = 'https://github.com/Mahmoud-t0lba/screen_shot'
   s.license          = { :file => '../LICENSE' }

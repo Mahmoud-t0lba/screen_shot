@@ -1,5 +1,5 @@
-name: prevent_screenshot_io_example
-description: Demonstrates how to use the prevent_screenshot_io plugin.
+name: prevent_app_screen_example
+description: Demonstrates how to use the prevent_app_screen plugin.
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -16,6 +16,8 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  integration_test:
+    sdk: flutter
 
 flutter:
   uses-material-design: true
