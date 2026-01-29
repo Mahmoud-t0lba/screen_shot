@@ -1,40 +1,59 @@
 # 🛡️ Prevent App Screen
 
-A powerful, easy-to-use Flutter plugin to protect your app from **Screenshots** and **Screen Recordings**. Perfect for banking, medical, or private social apps.
+[![Pub Version](https://img.shields.io/pub/v/prevent_app_screen?style=flat-square&logo=dart)](https://pub.dev/packages/prevent_app_screen)
+[![License](https://img.shields.io/github/license/Mahmoud-t0lba/screen_shot?style=flat-square)](https://github.com/Mahmoud-t0lba/screen_shot/blob/main/LICENSE)
+
+A powerful, high-performance Flutter plugin designed to protect your application from **Screenshots** and **Screen Recordings**. Ideal for FinTech, Healthcare, and Privacy-focused applications.
+
+---
+
+## ✨ Key Features
+*   🚀 **Global Protection**: Secure your entire app with a single initialization.
+*   📱 **Screen-Level Security**: Apply protection to specific routes or pages.
+*   🌫️ **Granular Blur (Smart Masking)**: Protect specific UI components while keeping the rest of the app functional.
+*   🔄 **App Switcher Blur**: Automatically hides app content in the recent apps/multitasking view.
+*   🛠️ **Proactive Window Locking**: Automatically blocks screenshots when sensitive widgets are on screen.
+*   🎥 **Recording Detection**: Real-time detection and response to screen recordings and mirroring.
 
 ---
 
 ## 🌟 Three Levels of Protection
 
 ### 1️⃣ Global Protection (App-Wide)
-Protect every single screen in your app with one line of code.
+Best for banking or high-security apps where the entire experience must be private.
+
 <p align="center">
-  <img src="assets/global_protection.png" width="250" alt="Global Protection"/>
+  <img src="https://raw.githubusercontent.com/Mahmoud-t0lba/screen_shot/main/assets/global_protection.png" width="250" alt="Global Protection"/>
 </p>
 
 ```dart
 void main() {
-  // Lock the entire app instantly
+  WidgetsFlutterBinding.ensureInitialized();
+  
+  // Enable protection for every screen in the app
   PreventAppScreen.initialize(true); 
-  runApp(MyApp());
+  
+  runApp(const MyApp());
 }
 ```
 
 ---
 
 ### 2️⃣ Full Screen Guard
-Only protect specific sensitive screens (like Payment or Profile).
+Wrap specific screens to prevent captures only while that screen is visible.
+
 <p align="center">
-  <img src="assets/screen_protection.png" width="450" alt="Screen Protection"/>
+  <img src="https://raw.githubusercontent.com/Mahmoud-t0lba/screen_shot/main/assets/screen_protection.png" width="450" alt="Screen Protection"/>
 </p>
 
 ```dart
 @override
 Widget build(BuildContext context) {
   return FullScreenProtection(
-    prevent: true, // Auto-release when you leave this screen
+    prevent: true, // Auto-blocks screenshots for this window
     child: Scaffold(
-      body: Text("This page is totally secure!"),
+      appBar: AppBar(title: Text("Secret Settings")),
+      body: MyPrivateProfile(),
     ),
   );
 }
@@ -42,29 +61,41 @@ Widget build(BuildContext context) {
 
 ---
 
-### 3️⃣ Specific Widget Blur (Smart Masking)
-Blur only the sensitive parts (like Credit Cards) while keeping the rest of the UI visible.
+### 3️⃣ Specific Widget Protection (Flexible)
+Protect specific items (like QR codes or Credit Cards). This mode supports **Blurring** or showing a **Placeholder**.
+
 <p align="center">
-  <img src="assets/specific_widget.png" width="300" alt="Specific Widget Blur"/>
+  <img src="https://raw.githubusercontent.com/Mahmoud-t0lba/screen_shot/main/assets/specific_widget.png" width="300" alt="Specific Widget Blur"/>
 </p>
 
 ```dart
 SpecificWidgetProtection(
-  prevent: true,    // Blurs automatically if recording is detected
-  blurAmount: 20,   // Customize the blur intensity
-  child: Card(
-    child: Text("Credit Card: 4532 - **** - **** - 1234"),
-  ),
+  protectWindow: true,   // Proactive: Blocks screenshots for the whole app ONLY while this is visible
+  blurAmount: 15.0,      // Customize the blur intensity
+  placeholder: MyLockIcon(), // Optional: Show a custom widget instead of blurring
+  child: CreditCardWidget(),
 )
 ```
 
+| Parameter | Description |
+| :--- | :--- |
+| `protectWindow` | **Proactive Mode**: Blocks the whole app screenshot as long as this widget is on screen. |
+| `prevent` | **Detection Mode**: Blurs/Hides the widget automatically if a recording starts. |
+| `forceBlur` | **Privacy Mode**: Manually triggers the blur regardless of capture status. |
+| `placeholder` | A custom widget to show instead of the blurred child (e.g., a Black Box). |
+
 ---
 
-## 🔥 Features
-*   ✅ **Block Screenshots**: Prevents capturing sensitive info.
-*   ✅ **Hide in Task Manager**: App content is hidden in the Recent Apps switcher.
-*   ✅ **Smart Recording Detection**: Detects screen recording and blurs content immediately.
-*   ✅ **Simple API**: Designed for developers who value speed and security.
+## 🔍 Platform Support & Behavior
+
+| Feature | Android | iOS | Behavior Description |
+| :--- | :---: | :---: | :--- |
+| **Screenshot Blocking** | ✅ | ✅ | Android shows a black screen; iOS shows a custom secure overlay. |
+| **Recording Prevention** | ✅ | ✅ | Prevents recording of the secure window content. |
+| **App Switcher Blur** | ✅ | ✅ | Hides app preview in the multitasking menu. |
+| **Capture Detection** | ✅ | ✅ | Notifies the app through `onCapturedChanged` listener. |
+
+> **Note**: For Screenshots, the OS typically captures the frame before notifying the app. To reliably block a screenshot file, use `FullScreenProtection` or the `protectWindow` flag in `SpecificWidgetProtection`.
 
 ## 📦 Installation
 
@@ -77,14 +108,11 @@ dependencies:
 
 ---
 
-## 💻 Platform Support
-
-| Feature | Android | iOS |
-| :--- | :---: | :---: |
-| **Screenshot Blocking** | ✅ | ✅ |
-| **Recording Detection** | ✅ | ✅ |
-| **App Switcher Blur** | ✅ | ✅ |
-| **Partial Blur** | ✅ | ✅ |
+## 💬 Aliases (Legacy Support)
+The plugin provides these aliases to match your preferred naming style:
+- `SecureWidget` -> `SpecificWidgetProtection`
+- `PreventWidget` -> `FullScreenProtection`
+- `PreventScreen` -> `FullScreenProtection`
 
 ---
 
