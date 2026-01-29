@@ -35,8 +35,10 @@ class PreventAppScreen {
 
   const PreventAppScreen();
 
-  void addCapturedListener(Function(bool) listener) => _capturedListeners.add(listener);
-  void removeCapturedListener(Function(bool) listener) => _capturedListeners.remove(listener);
+  void addCapturedListener(Function(bool) listener) =>
+      _capturedListeners.add(listener);
+  void removeCapturedListener(Function(bool) listener) =>
+      _capturedListeners.remove(listener);
 
   Future<void> enableSecure() async => await _enable();
   Future<void> disableSecure() async => await _disable();
@@ -90,7 +92,8 @@ class SpecificWidgetProtection extends StatefulWidget {
   });
 
   @override
-  State<SpecificWidgetProtection> createState() => _SpecificWidgetProtectionState();
+  State<SpecificWidgetProtection> createState() =>
+      _SpecificWidgetProtectionState();
 }
 
 class _SpecificWidgetProtectionState extends State<SpecificWidgetProtection> {
@@ -157,7 +160,8 @@ class FullScreenProtection extends StatefulWidget {
   final Widget child;
   final bool prevent;
 
-  const FullScreenProtection({super.key, required this.child, this.prevent = true});
+  const FullScreenProtection(
+      {super.key, required this.child, this.prevent = true});
 
   @override
   State<FullScreenProtection> createState() => _FullScreenProtectionState();

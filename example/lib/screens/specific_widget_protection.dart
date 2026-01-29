@@ -40,7 +40,9 @@ class SpecificWidgetProtectionScreen extends StatelessWidget {
                   children: [
                     Icon(Icons.lock, color: Colors.white, size: 50),
                     SizedBox(height: 10),
-                    Text("SECURE CONTENT", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                    Text("SECURE CONTENT",
+                        style: TextStyle(
+                            color: Colors.white, fontWeight: FontWeight.bold)),
                   ],
                 ),
               ),
@@ -48,24 +50,35 @@ class SpecificWidgetProtectionScreen extends StatelessWidget {
                 width: double.infinity,
                 padding: const EdgeInsets.all(24),
                 decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [Colors.indigo.shade800, Colors.indigo.shade500]),
+                  gradient: LinearGradient(
+                      colors: [Colors.indigo.shade800, Colors.indigo.shade500]),
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: const [BoxShadow(color: Colors.black26, blurRadius: 10, offset: Offset(0, 5))],
+                  boxShadow: const [
+                    BoxShadow(
+                        color: Colors.black26,
+                        blurRadius: 10,
+                        offset: Offset(0, 5))
+                  ],
                 ),
                 child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text("SECRET KEY", style: TextStyle(color: Colors.white70, fontSize: 12)),
+                    Text("SECRET KEY",
+                        style: TextStyle(color: Colors.white70, fontSize: 12)),
                     SizedBox(height: 10),
                     Text(
                       "sk-live-52b3-99ab-6621-001x",
                       style: TextStyle(
-                          color: Colors.white, fontSize: 18, fontFamily: 'monospace', fontWeight: FontWeight.bold),
+                          color: Colors.white,
+                          fontSize: 18,
+                          fontFamily: 'monospace',
+                          fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 20),
                     Align(
                       alignment: Alignment.bottomRight,
-                      child: Icon(Icons.vpn_key, color: Colors.white30, size: 40),
+                      child:
+                          Icon(Icons.vpn_key, color: Colors.white30, size: 40),
                     )
                   ],
                 ),

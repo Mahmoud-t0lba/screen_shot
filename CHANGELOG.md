@@ -1,3 +1,9 @@
+## 0.1.2
+
+* **SPM Support**: Added support for Swift Package Manager on iOS and macOS.
+* **Refactoring**: Restructured native code to follow Flutter's recommended SPM directory structure.
+* **Privacy**: Enabled and properly bundled Privacy Manifest (`PrivacyInfo.xcprivacy`) for both iOS and macOS via SPM and CocoaPods.
+
 ## 0.1.1
 
 * **Multi-Platform Support**: Added support for macOS, Windows, Linux, and Web.

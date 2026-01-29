@@ -30,7 +30,8 @@ class MainMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Protection Features'), centerTitle: true),
+      appBar:
+          AppBar(title: const Text('Protection Features'), centerTitle: true),
       body: Center(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
@@ -42,8 +43,10 @@ class MainMenu extends StatelessWidget {
                 subtitle: "Protect the whole window",
                 icon: Icons.fullscreen,
                 color: Colors.blue,
-                onTap: () =>
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => const FullScreenProtectionScreen())),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => const FullScreenProtectionScreen())),
               ),
               const SizedBox(height: 20),
               _LargeMenuButton(
@@ -51,8 +54,11 @@ class MainMenu extends StatelessWidget {
                 subtitle: "Blur only a small part",
                 icon: Icons.crop_free,
                 color: Colors.purple,
-                onTap: () =>
-                    Navigator.push(context, MaterialPageRoute(builder: (_) => const SpecificWidgetProtectionScreen())),
+                onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) =>
+                            const SpecificWidgetProtectionScreen())),
               ),
             ],
           ),
@@ -69,7 +75,11 @@ class _LargeMenuButton extends StatelessWidget {
   final VoidCallback onTap;
 
   const _LargeMenuButton(
-      {required this.title, required this.subtitle, required this.icon, required this.color, required this.onTap});
+      {required this.title,
+      required this.subtitle,
+      required this.icon,
+      required this.color,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -87,8 +97,11 @@ class _LargeMenuButton extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(title, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
-              Text(subtitle, style: const TextStyle(fontSize: 14, color: Colors.grey)),
+              Text(title,
+                  style: const TextStyle(
+                      fontSize: 18, fontWeight: FontWeight.bold)),
+              Text(subtitle,
+                  style: const TextStyle(fontSize: 14, color: Colors.grey)),
             ],
           ),
           const Spacer(),

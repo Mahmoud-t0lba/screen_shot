@@ -44,7 +44,7 @@ void main() {
     platform.setCapturedHandler((val) => captured = val);
 
     // Simulate a callback from the platform
-    final ByteData? message = const StandardMethodCodec().encodeMethodCall(
+    final ByteData message = const StandardMethodCodec().encodeMethodCall(
       const MethodCall('onCapturedChanged', true),
     );
 

@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:prevent_app_screen/prevent_app_screen.dart';
 
@@ -40,7 +39,8 @@ class _PartialBlurDemoState extends State<PartialBlurDemo> {
               child: Card(
                 elevation: 8,
                 color: Colors.purple.shade50,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
                 child: const Padding(
                   padding: EdgeInsets.all(24.0),
                   child: Column(
@@ -49,7 +49,8 @@ class _PartialBlurDemoState extends State<PartialBlurDemo> {
                       SizedBox(height: 15),
                       Text(
                         "PRIVATE ACCOUNT INFO",
-                        style: TextStyle(fontWeight: FontWeight.bold, letterSpacing: 1.2),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold, letterSpacing: 1.2),
                       ),
                       Divider(height: 30),
                       Text(
@@ -60,9 +61,11 @@ class _PartialBlurDemoState extends State<PartialBlurDemo> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Text("EXP: 12/28", style: TextStyle(color: Colors.grey)),
+                          Text("EXP: 12/28",
+                              style: TextStyle(color: Colors.grey)),
                           SizedBox(width: 30),
-                          Text("CVV: 999", style: TextStyle(color: Colors.grey)),
+                          Text("CVV: 999",
+                              style: TextStyle(color: Colors.grey)),
                         ],
                       )
                     ],
@@ -81,7 +84,8 @@ class _PartialBlurDemoState extends State<PartialBlurDemo> {
             ElevatedButton(
               onPressed: () => setState(() => _forceBlur = !_forceBlur),
               style: ElevatedButton.styleFrom(
-                backgroundColor: _forceBlur ? Colors.green.shade100 : Colors.purple.shade100,
+                backgroundColor:
+                    _forceBlur ? Colors.green.shade100 : Colors.purple.shade100,
                 foregroundColor: _forceBlur ? Colors.green : Colors.purple,
               ),
               child: Text(_forceBlur ? "Unlock Content" : "Force Manual Blur"),

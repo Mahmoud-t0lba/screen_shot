@@ -5,10 +5,12 @@ class FullScreenProtectionScreen extends StatefulWidget {
   const FullScreenProtectionScreen({super.key});
 
   @override
-  State<FullScreenProtectionScreen> createState() => _FullScreenProtectionScreenState();
+  State<FullScreenProtectionScreen> createState() =>
+      _FullScreenProtectionScreenState();
 }
 
-class _FullScreenProtectionScreenState extends State<FullScreenProtectionScreen> {
+class _FullScreenProtectionScreenState
+    extends State<FullScreenProtectionScreen> {
   bool _secureScreen = false;
 
   @override

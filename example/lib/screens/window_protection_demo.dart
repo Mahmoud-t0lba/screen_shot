@@ -44,7 +44,8 @@ class WindowProtectionDemo extends StatelessWidget {
                       Icon(Icons.info_outline, color: Colors.orange),
                       SizedBox(width: 10),
                       Expanded(
-                        child: Text("Try taking a screenshot now! It will be blocked or show a black/secure screen."),
+                        child: Text(
+                            "Try taking a screenshot now! It will be blocked or show a black/secure screen."),
                       ),
                     ],
                   ),

@@ -5,7 +5,8 @@ import 'package:prevent_app_screen/prevent_app_screen_method_channel.dart';
 import 'package:plugin_platform_interface/plugin_platform_interface.dart';
 import 'package:flutter/widgets.dart';
 
-class MockPreventAppScreenPlatform extends PreventAppScreenPlatform with MockPlatformInterfaceMixin {
+class MockPreventAppScreenPlatform extends PreventAppScreenPlatform
+    with MockPlatformInterfaceMixin {
   int enableSecureCount = 0;
   int disableSecureCount = 0;
   Function(bool)? capturedHandler;
@@ -30,7 +31,8 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   test('$MethodChannelPreventAppScreen is the default instance', () {
-    expect(PreventAppScreenPlatform.instance, isA<MethodChannelPreventAppScreen>());
+    expect(PreventAppScreenPlatform.instance,
+        isA<MethodChannelPreventAppScreen>());
   });
 
   group('PreventAppScreen API', () {
@@ -65,7 +67,8 @@ void main() {
       expect(mockPlatform.enableSecureCount, 1);
     });
 
-    test('disableSecure decrements count and calls platform when zero', () async {
+    test('disableSecure decrements count and calls platform when zero',
+        () async {
       const plugin = PreventAppScreen();
       await plugin.enableSecure(); // count 1, platform 1
       await plugin.disableSecure(); // count 0, platform 1
@@ -98,7 +101,8 @@ void main() {
       PreventAppScreen.resetState();
     });
 
-    testWidgets('FullScreenProtection calls enableSecure on init', (WidgetTester tester) async {
+    testWidgets('FullScreenProtection calls enableSecure on init',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         const Directionality(
           textDirection: TextDirection.ltr,
@@ -112,11 +116,14 @@ void main() {
       expect(mockPlatform.enableSecureCount, 1);
 
       // Dispose should call disableSecure
-      await tester.pumpWidget(const SizedBox()); // Different widget to trigger dispose
+      await tester
+          .pumpWidget(const SizedBox()); // Different widget to trigger dispose
       expect(mockPlatform.disableSecureCount, 1);
     });
 
-    testWidgets('SpecificWidgetProtection with protectWindow calls enableSecure', (WidgetTester tester) async {
+    testWidgets(
+        'SpecificWidgetProtection with protectWindow calls enableSecure',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         const Directionality(
           textDirection: TextDirection.ltr,
@@ -133,7 +140,8 @@ void main() {
       expect(mockPlatform.disableSecureCount, 1);
     });
 
-    testWidgets('SpecificWidgetProtection blurs content when active', (WidgetTester tester) async {
+    testWidgets('SpecificWidgetProtection blurs content when active',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         const Directionality(
           textDirection: TextDirection.ltr,

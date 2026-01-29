@@ -4,7 +4,7 @@
 #
 Pod::Spec.new do |s|
   s.name             = 'prevent_app_screen'
-  s.version          = '0.1.1'
+  s.version          = '0.1.2'
   s.summary          = 'A Flutter plugin to prevent screenshots and screen recordings.'
   s.description      = <<-DESC
 A Flutter plugin to prevent screenshots and screen recordings on Android, iOS, macOS, Windows, Linux, and Web.
@@ -13,9 +13,10 @@ A Flutter plugin to prevent screenshots and screen recordings on Android, iOS, m
   s.license          = { :file => '../LICENSE' }
   s.author           = { 'Mahmoud Tolba' => 'mahmoudt0lba0111@gmail.com' }
   s.source           = { :path => '.' }
-  s.source_files = 'Classes/**/*'
+  s.source_files = 'prevent_app_screen/Sources/prevent_app_screen/**/*'
   s.dependency 'Flutter'
   s.platform = :ios, '11.0'
+  s.resource_bundles = {'prevent_app_screen_privacy' => ['prevent_app_screen/Sources/prevent_app_screen/Resources/PrivacyInfo.xcprivacy']}
 
   # Flutter.framework does not contain a i386 slice.
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'i386' }

@@ -22,9 +22,13 @@ class _GlobalProtectionDemoState extends State<GlobalProtectionDemo> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(
-              _GlobalTransformation.isCurrentlySecure ? Icons.lock : Icons.lock_open,
+              _GlobalTransformation.isCurrentlySecure
+                  ? Icons.lock
+                  : Icons.lock_open,
               size: 100,
-              color: _GlobalTransformation.isCurrentlySecure ? Colors.green : Colors.red,
+              color: _GlobalTransformation.isCurrentlySecure
+                  ? Colors.green
+                  : Colors.red,
             ),
             const SizedBox(height: 30),
             Text(
@@ -42,12 +46,18 @@ class _GlobalProtectionDemoState extends State<GlobalProtectionDemo> {
               onPressed: () async {
                 final newState = !_GlobalTransformation.isCurrentlySecure;
                 await PreventAppScreen.initialize(newState);
-                setState(() => _GlobalTransformation.isCurrentlySecure = newState);
+                setState(
+                    () => _GlobalTransformation.isCurrentlySecure = newState);
               },
-              icon: Icon(_GlobalTransformation.isCurrentlySecure ? Icons.security_update_good : Icons.security),
-              label: Text(_GlobalTransformation.isCurrentlySecure ? "Disable Globally" : "Enable Globally"),
+              icon: Icon(_GlobalTransformation.isCurrentlySecure
+                  ? Icons.security_update_good
+                  : Icons.security),
+              label: Text(_GlobalTransformation.isCurrentlySecure
+                  ? "Disable Globally"
+                  : "Enable Globally"),
               style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
               ),
             ),
           ],

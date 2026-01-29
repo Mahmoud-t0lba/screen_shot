@@ -27,7 +27,7 @@ Add the dependency to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  prevent_app_screen: ^0.1.1
+  prevent_app_screen: ^0.1.2
 ```
 
 ### Basic Initialization

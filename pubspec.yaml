@@ -1,6 +1,6 @@
 name: prevent_app_screen
 description: A Flutter plugin to prevent screenshots and screen recordings on Android, iOS, macOS, Windows, Linux, and Web.
-version: 0.1.1
+version: 0.1.2
 homepage: https://github.com/Mahmoud-t0lba/screen_shot
 
 environment:
