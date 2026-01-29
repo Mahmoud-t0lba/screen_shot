@@ -16,4 +16,14 @@ class MethodChannelPreventAppScreen extends PreventAppScreenPlatform {
   Future<void> disableSecure() async {
     await methodChannel.invokeMethod<void>('disableSecure');
   }
+
+  @override
+  void setCapturedHandler(Function(bool isCaptured) onCaptured) {
+    methodChannel.setMethodCallHandler((call) async {
+      if (call.method == 'onCapturedChanged') {
+        final bool isCaptured = call.arguments as bool;
+        onCaptured(isCaptured);
+      }
+    });
+  }
 }

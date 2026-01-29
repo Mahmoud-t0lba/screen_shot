@@ -23,4 +23,9 @@ abstract class PreventAppScreenPlatform extends PlatformInterface {
   Future<void> disableSecure() {
     throw UnimplementedError('disableSecure() has not been implemented.');
   }
+
+  /// Sets a handler for screen capture status changes.
+  void setCapturedHandler(Function(bool isCaptured) onCaptured) {
+    throw UnimplementedError('setCapturedHandler() has not been implemented.');
+  }
 }

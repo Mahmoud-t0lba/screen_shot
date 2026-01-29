@@ -11,6 +11,24 @@ public class PreventAppScreenPlugin: NSObject, FlutterPlugin {
         instance.channel = channel
         registrar.addMethodCallDelegate(instance, channel: channel)
         registrar.addApplicationDelegate(instance)
+        
+        // Listen for capture changes
+        NotificationCenter.default.addObserver(instance, selector: #selector(instance.captureStateChanged), name: UIScreen.capturedDidChangeNotification, object: nil)
+        // Listen for screenshots
+        NotificationCenter.default.addObserver(instance, selector: #selector(instance.screenshotTaken), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
+    }
+
+    @objc private func captureStateChanged() {
+        let isCaptured = UIScreen.main.isCaptured
+        channel?.invokeMethod("onCapturedChanged", arguments: isCaptured)
+    }
+    
+    @objc private func screenshotTaken() {
+        // Screenshots are momentary, so we pulse the captured state
+        channel?.invokeMethod("onCapturedChanged", arguments: true)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.channel?.invokeMethod("onCapturedChanged", arguments: UIScreen.main.isCaptured)
+        }
     }
 
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
@@ -46,6 +64,8 @@ public class PreventAppScreenPlugin: NSObject, FlutterPlugin {
     public func applicationDidBecomeActive(_ application: UIApplication) {
         if let window = UIApplication.shared.windows.first {
             removeBlurScreen(from: window)
+            // Re-sync capture state
+            captureStateChanged()
         }
     }
 
