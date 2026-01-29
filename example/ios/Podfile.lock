@@ -1,21 +1,21 @@
 PODS:
   - Flutter (1.0.0)
-  - prevent_screenshot_io (0.0.1):
+  - prevent_app_screen (0.0.1):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - prevent_screenshot_io (from `.symlinks/plugins/prevent_screenshot_io/ios`)
+  - prevent_app_screen (from `.symlinks/plugins/prevent_app_screen/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  prevent_screenshot_io:
-    :path: ".symlinks/plugins/prevent_screenshot_io/ios"
+  prevent_app_screen:
+    :path: ".symlinks/plugins/prevent_app_screen/ios"
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  prevent_screenshot_io: 61735371409bc178098af21fb219a54a4fecae74
+  prevent_app_screen: 662912310b8920963a98bc797e8380ab65820537
 
 PODFILE CHECKSUM: b6c1777b8742f73e5cdad8789e3d9f4d8eaca881
 

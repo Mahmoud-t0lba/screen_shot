@@ -3,6 +3,7 @@ import UIKit
 
 public class PreventAppScreenPlugin: NSObject, FlutterPlugin {
     private var channel: FlutterMethodChannel?
+    private var isSecure: Bool = false
     
     public static func register(with registrar: FlutterPluginRegistrar) {
         let channel = FlutterMethodChannel(name: "prevent_app_screen", binaryMessenger: registrar.messenger())
@@ -16,6 +17,7 @@ public class PreventAppScreenPlugin: NSObject, FlutterPlugin {
         switch call.method {
         case "enableSecure":
             if let window = UIApplication.shared.windows.first {
+                isSecure = true
                 window.makeSecure()
                 result(nil)
             } else {
@@ -23,6 +25,7 @@ public class PreventAppScreenPlugin: NSObject, FlutterPlugin {
             }
         case "disableSecure":
             if let window = UIApplication.shared.windows.first {
+                isSecure = false
                 window.makeInsecure()
                 result(nil)
             } else {
@@ -35,7 +38,7 @@ public class PreventAppScreenPlugin: NSObject, FlutterPlugin {
 
     // Auto-blur implementation for the App Switcher
     public func applicationWillResignActive(_ application: UIApplication) {
-        if let window = UIApplication.shared.windows.first {
+        if isSecure, let window = UIApplication.shared.windows.first {
             blurScreen(in: window)
         }
     }
